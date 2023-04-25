@@ -9,12 +9,28 @@
     <string name="email_cannot_empty">Email cannot be empty</string>
     <string name="password_minimum">Password must consist of minimum 6 characters</string>
 
-    <!-- Welcome Activity. -->
+    <!-- Welcome. -->
     <string name="welcome">Welcome!</string>
     <string name="greeting">Come join us and enjoy your stories in a colorful world!</string>
     <string name="greeting1">See what your friends are up to!</string>
     <string name="greeting2">Express yourself!</string>
     <string name="greeting_picture">Greeting picture</string>
     <string name="get_started">Get Started</string>
+
+    <!-- Login. -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="login">Log In</string>
+    <string name="or">or</string>
+    <string name="register">Register</string>
+    <string name="register_an_account">Register an account</string>
+
+    <string name="join_us">Join Us!</string>
+    <string name="introduction">Explore your story world to color this world with your story!</string>
+    <string name="register_this_account">Register this account</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="login_instead">Login instead</string>
+
 
 </resources>

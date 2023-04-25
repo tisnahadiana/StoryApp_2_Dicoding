@@ -15,5 +15,5 @@ interface StoryDao {
     suspend fun insertStories(vararg storyEntity: StoryEntity)
 
     @Query("DELETE FROM story")
-    suspend fun deleteAllStories()
+    fun deleteAllStories()
 }
