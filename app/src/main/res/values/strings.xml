@@ -4,7 +4,17 @@
     <string name="title_map">Map</string>
     <string name="title_settings">Settings</string>
 
+    <!-- CustomView. -->
     <string name="valid_email">Please input a valid email</string>
     <string name="email_cannot_empty">Email cannot be empty</string>
     <string name="password_minimum">Password must consist of minimum 6 characters</string>
+
+    <!-- Welcome Activity. -->
+    <string name="welcome">Welcome!</string>
+    <string name="greeting">Come join us and enjoy your stories in a colorful world!</string>
+    <string name="greeting1">See what your friends are up to!</string>
+    <string name="greeting2">Express yourself!</string>
+    <string name="greeting_picture">Greeting picture</string>
+    <string name="get_started">Get Started</string>
+
 </resources>
