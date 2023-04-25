@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="id.tisnahadiana.storyapp.ui.dashboard.DashboardFragment"
+        android:name="id.tisnahadiana.storyapp.ui.map.MapFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="id.tisnahadiana.storyapp.ui.notifications.NotificationsFragment"
+        android:name="id.tisnahadiana.storyapp.ui.settings.SettingsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
