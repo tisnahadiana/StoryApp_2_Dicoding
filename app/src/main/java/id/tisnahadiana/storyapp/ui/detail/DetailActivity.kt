@@ -5,7 +5,6 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
-import id.tisnahadiana.storyapp.R
 import id.tisnahadiana.storyapp.data.local.room.StoryEntity
 import id.tisnahadiana.storyapp.databinding.ActivityDetailBinding
 import java.io.Serializable
@@ -22,7 +21,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-        val story = intent.serializable<StoryEntity>(EXTRA_DETAIL)!!
+        val story = intent.getParcelableExtra<StoryEntity>(EXTRA_DETAIL)!!
         val name = story.name
         val description = story.description
         val imgUrl = story.photoUrl
