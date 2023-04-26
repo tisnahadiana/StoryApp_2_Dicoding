@@ -54,5 +54,8 @@
     <string name="error_list">An error occurred,  please wait!.</string>
     <string name="error_occurred">An error has occurred!</string>
 
+    <!-- Detail. -->
+    <string name="expand_description">Expand description</string>
+
 
 </resources>
