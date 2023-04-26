@@ -23,5 +23,4 @@ data class StoryEntity(
 
     @PrimaryKey
     val id: String,
-
-    ) : Serializable
+) : Serializable
