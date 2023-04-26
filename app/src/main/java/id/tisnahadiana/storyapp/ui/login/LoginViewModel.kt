@@ -21,7 +21,7 @@ class LoginViewModel@Inject constructor(
 
     fun storeAuthToken(token: String) {
         viewModelScope.launch {
-            userRepository.storeAuthToken(token)
+            userRepository.saveToken(token)
         }
     }
 

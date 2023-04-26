@@ -3,11 +3,15 @@ package id.tisnahadiana.storyapp.ui.settings
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import id.tisnahadiana.storyapp.data.local.datastore.LoginPreferences
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SettingsViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+class SettingsViewModel @Inject constructor(
+    private val loginPreferences: LoginPreferences
+): ViewModel() {
+    fun logout() {
+        viewModelScope.launch { loginPreferences.deleteToken() }
     }
-    val text: LiveData<String> = _text
 }

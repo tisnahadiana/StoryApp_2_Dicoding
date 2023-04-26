@@ -19,4 +19,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_language"
+        style="@style/Button"
+        android:drawableStart="@drawable/ic_settings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="32dp"
+        android:contentDescription="@string/get_started"
+        android:text="@string/setting_language"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        style="@style/Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/get_started"
+        android:text="@string/logout"
+        app:layout_constraintEnd_toEndOf="@+id/btn_language"
+        app:layout_constraintStart_toStartOf="@+id/btn_language"
+        app:layout_constraintTop_toBottomOf="@+id/btn_language" />
 </androidx.constraintlayout.widget.ConstraintLayout>

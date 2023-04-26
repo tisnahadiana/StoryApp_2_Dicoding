@@ -5,6 +5,7 @@
     <string name="title_settings">Settings</string>
 
     <!-- CustomView. -->
+    <string name="name_cannot_empty">Name cannot be empty</string>
     <string name="valid_email">Please input a valid email</string>
     <string name="email_cannot_empty">Email cannot be empty</string>
     <string name="password_minimum">Password must consist of minimum 6 characters</string>
@@ -25,12 +26,24 @@
     <string name="or">or</string>
     <string name="register">Register</string>
     <string name="register_an_account">Register an account</string>
+    <string name="login_failed">Login failed, please try again!</string>
+    <string name="login_success">Login successful!</string>
 
     <string name="join_us">Join Us!</string>
     <string name="introduction">Explore your story world to color this world with your story!</string>
     <string name="register_this_account">Register this account</string>
     <string name="have_account">Already have an account?</string>
     <string name="login_instead">Login instead</string>
+    <string name="register_success">Registration successful!</string>
+    <string name="register_failed">Registration failed!</string>
+    <string name="setting_language">Setting Language</string>
+    <string name="logout">Logout</string>
+
+    <!-- Settings. -->
+    <string name="settings_title">Settings</string>
+    <string name="logout_confirmation">Are you sure you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 
 </resources>

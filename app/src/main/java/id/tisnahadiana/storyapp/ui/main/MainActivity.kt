@@ -34,4 +34,8 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+
+    companion object {
+        const val TOKEN = "extra_token"
+    }
 }

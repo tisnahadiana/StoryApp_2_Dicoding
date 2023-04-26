@@ -39,7 +39,7 @@ class UserRepository @Inject constructor(
         }
     }
 
-    suspend fun storeAuthToken(token: String) { loginPreferences.saveToken(token) }
+    suspend fun saveToken(token: String) { loginPreferences.saveToken(token) }
 
-    fun getAuthToken(): LiveData<String?> = loginPreferences.getToken()
+    fun getToken(): LiveData<String?> = loginPreferences.getToken()
 }
