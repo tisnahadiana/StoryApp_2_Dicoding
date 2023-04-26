@@ -7,9 +7,10 @@ import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import id.tisnahadiana.storyapp.databinding.ActivityWelcomeBinding
 import id.tisnahadiana.storyapp.ui.main.MainActivity
-
+@AndroidEntryPoint
 class WelcomeActivity : AppCompatActivity() {
     private val binding: ActivityWelcomeBinding by lazy {
         ActivityWelcomeBinding.inflate(layoutInflater)
