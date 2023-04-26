@@ -3,6 +3,7 @@ package id.tisnahadiana.storyapp.ui.home
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.paging.PagingData
@@ -24,7 +26,8 @@ import id.tisnahadiana.storyapp.ui.adapter.StoryAdapter
 import id.tisnahadiana.storyapp.ui.detail.DetailActivity
 import id.tisnahadiana.storyapp.ui.detail.DetailActivity.Companion.EXTRA_DETAIL
 import id.tisnahadiana.storyapp.ui.login.LoginActivity
-import id.tisnahadiana.storyapp.ui.main.MainActivity.Companion.TOKEN
+import id.tisnahadiana.storyapp.ui.main.MainActivity.Companion.EXTRA_TOKEN
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 @ExperimentalPagingApi
@@ -39,7 +42,7 @@ class HomeFragment : Fragment() {
 
     private val launchPostActivity = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ) { getStory() }
+    ) { getStories() }
 
 
     override fun onCreateView(
@@ -63,28 +66,35 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        token = viewModel.checkIfTokenAvailable().toString()
-
-        setRv()
-        getStory()
-        swipeRefresh()
-
         binding.buttonAdd.setOnClickListener {
 
         }
     }
 
-    private fun swipeRefresh() {
-        binding.swipe.setOnRefreshListener { getStory() }
+
+    private fun checkIfSessionValid() {
+        viewModel.checkIfTokenAvailable().observe(requireActivity()) {
+            if (it == "null") {
+                val intent = Intent(requireContext(), LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            } else {
+                setupRecyclerView("Bearer $it")
+            }
+        }
     }
 
-    private fun setRv() {
+    private fun setupRecyclerView(token: String) {
+        binding.swipe.setOnRefreshListener {
+            viewModel.getStory(token).observe(viewLifecycleOwner) { updateAdapter(it) }
+        }
+
         storyAdapter = StoryAdapter()
         storyAdapter.addLoadStateListener {
             if ((it.source.refresh is LoadState.NotLoading && it.append.endOfPaginationReached && storyAdapter.itemCount < 1) || it.source.refresh is LoadState.Error) showErrorOccurred(true)
             else showErrorOccurred(false)
 
-            binding?.swipe?.isRefreshing = it.source.refresh is LoadState.Loading
+            binding.swipe.isRefreshing = it.source.refresh is LoadState.Loading
         }
         storyAdapter.setOnStartActivityCallback(object : StoryAdapter.OnStartActivityCallback {
             override fun onStartActivityCallback(story: StoryEntity, bundle: Bundle?) {
@@ -96,7 +106,7 @@ class HomeFragment : Fragment() {
         })
 
         try {
-            recyclerView = binding?.rvStories!!
+            recyclerView = binding.rvStories
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = storyAdapter.withLoadStateFooter(
@@ -110,7 +120,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun getStory() {
+    private fun getStories() {
         viewModel.getStory(token).observe(viewLifecycleOwner) {
             updateAdapter(it)
         }
@@ -121,15 +131,7 @@ class HomeFragment : Fragment() {
         recyclerView.smoothScrollToPosition(0)
     }
 
-    private fun checkIfSessionValid() {
-        viewModel.checkIfTokenAvailable().observe(viewLifecycleOwner) {
-            if (it == "null") {
-                val intent = Intent(requireContext(), LoginActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-            }
-        }
-    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -137,7 +139,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showErrorOccurred(isError: Boolean) {
-        binding?.apply {
+        binding.apply {
             tvErrorHome.setVisible(isError)
             rvStories.setVisible(!isError)
         }
@@ -146,7 +148,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showMessage(context: Context ,message: String) {
-        context?.let {
+        context.let {
             Toast.makeText(it, message, Toast.LENGTH_SHORT).show()
         }
     }

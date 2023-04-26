@@ -15,17 +15,20 @@ class StoryRepository @Inject constructor(
     private val apiService: ApiService,
     private val storyDatabase: StoryDatabase
 ){
-    fun getStory(token: String): LiveData<PagingData<StoryEntity>> {
-        return Pager(
+    fun getStory(token: String): LiveData<PagingData<StoryEntity>> =
+        Pager(
             config = PagingConfig(
-                pageSize = 5
+                pageSize = 10
             ),
-            remoteMediator = StoryRemoteMediator(generateToken(token), apiService, storyDatabase),
+            remoteMediator = StoryRemoteMediator(
+                generateToken(token),
+                apiService,
+                storyDatabase
+            ),
             pagingSourceFactory = {
                 storyDatabase.storyDao().getStories()
             }
         ).liveData
-    }
 
     fun getStoryLocation(token: String): LiveData<Result<StoriesResponse>> = liveData {
         try {

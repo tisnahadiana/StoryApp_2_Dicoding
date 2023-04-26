@@ -34,6 +34,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val TOKEN = "extra_token"
+        const val EXTRA_TOKEN = "extra_token"
     }
 }

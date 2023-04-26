@@ -7,9 +7,14 @@ import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import id.tisnahadiana.storyapp.databinding.ActivityWelcomeBinding
+import id.tisnahadiana.storyapp.ui.login.LoginActivity
 import id.tisnahadiana.storyapp.ui.main.MainActivity
+import id.tisnahadiana.storyapp.ui.main.MainActivity.Companion.EXTRA_TOKEN
+import kotlinx.coroutines.launch
+
 @AndroidEntryPoint
 class WelcomeActivity : AppCompatActivity() {
     private val binding: ActivityWelcomeBinding by lazy {
@@ -28,6 +33,26 @@ class WelcomeActivity : AppCompatActivity() {
             startActivity(intent)
 
             hideSystemUI()
+
+//            lifecycleScope.launchWhenCreated {
+//                launch {
+//                    welcomeViewModel.getAuthToken().observe(this@WelcomeActivity) { token ->
+//                        if (token.isNullOrEmpty())
+//                            Intent(this@WelcomeActivity, LoginActivity::class.java)
+//                                .also {
+//                                    startActivity(it)
+//                                    finish()
+//                                }
+//                        else
+//                            Intent(this@WelcomeActivity, MainActivity::class.java)
+//                                .also {
+//                                    it.putExtra(EXTRA_TOKEN, token)
+//                                    startActivity(it)
+//                                    finish()
+//                                }
+//                    }
+//                }
+//            }
         }
     }
 

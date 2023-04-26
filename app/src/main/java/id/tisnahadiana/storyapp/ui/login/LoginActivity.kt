@@ -7,13 +7,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import id.tisnahadiana.storyapp.R
+import id.tisnahadiana.storyapp.data.repository.UserRepository
 import id.tisnahadiana.storyapp.databinding.ActivityLoginBinding
 import id.tisnahadiana.storyapp.ui.main.MainActivity
-import id.tisnahadiana.storyapp.ui.main.MainActivity.Companion.TOKEN
+import id.tisnahadiana.storyapp.ui.main.MainActivity.Companion.EXTRA_TOKEN
 import id.tisnahadiana.storyapp.ui.register.RegisterActivity
 import id.tisnahadiana.storyapp.ui.welcome.WelcomeActivity
 import kotlinx.coroutines.launch
@@ -44,30 +46,22 @@ class LoginActivity : AppCompatActivity() {
             if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
                 lifecycleScope.launchWhenResumed {
                     launch {
-                        viewModel.userLogin(email, password)
-                            .observe(this@LoginActivity) { result ->
-                                result.onSuccess { credential ->
-                                    credential.loginResult?.token?.let { token ->
-                                        viewModel.storeAuthToken(token)
-                                        showMessage(
-                                            this@LoginActivity,
-                                            getString(R.string.login_success)
-                                        )
-                                        Intent(this@LoginActivity, MainActivity::class.java).also {
-                                            it.putExtra(TOKEN, token)
-                                            startActivity(it)
-                                            finish()
-                                        }
+                        viewModel.userLogin(email, password).observe(this@LoginActivity) { result ->
+                            result.onSuccess { credential ->
+                                credential.loginResult?.token?.let { token ->
+                                    viewModel.storeAuthToken(token)
+                                    Intent(this@LoginActivity , MainActivity::class.java).also {
+                                        it.putExtra(EXTRA_TOKEN, token)
+                                        startActivity(it)
+                                        finish()
                                     }
                                 }
-                                result.onFailure {
-                                    showMessage(
-                                        this@LoginActivity,
-                                        getString(R.string.login_failed)
-                                    )
-                                    showLoading(false)
-                                }
                             }
+                            result.onFailure {
+                                showMessage(this@LoginActivity, getString(R.string.login_failed))
+                                showLoading(false)
+                            }
+                        }
                     }
                 }
 
@@ -103,7 +97,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding?.apply {
+        binding.apply {
             edLoginEmail.isEnabled = !isLoading
             edLoginPassword.isEnabled = !isLoading
             btnRegister.isEnabled = !isLoading

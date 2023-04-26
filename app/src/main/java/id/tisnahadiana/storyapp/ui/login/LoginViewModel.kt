@@ -14,14 +14,17 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel@Inject constructor(
     private val userRepository: UserRepository,
-    private val loginPreferences: LoginPreferences
+    private val loginPreferences: LoginPreferences,
 ): ViewModel() {
+
     suspend fun userLogin(email: String, password: String): LiveData<Result<LoginResponse>> =
         userRepository.userLogin(email, password)
 
+    fun getAuthToken(): LiveData<String?> = userRepository.getToken()
+
     fun storeAuthToken(token: String) {
         viewModelScope.launch {
-            userRepository.saveToken(token)
+            loginPreferences.saveToken(token)
         }
     }
 

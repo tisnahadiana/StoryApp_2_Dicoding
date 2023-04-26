@@ -10,17 +10,18 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import id.tisnahadiana.storyapp.data.local.datastore.LoginPreferences
 import id.tisnahadiana.storyapp.data.local.room.StoryEntity
 import id.tisnahadiana.storyapp.data.repository.StoryRepository
+import id.tisnahadiana.storyapp.data.repository.UserRepository
 import javax.inject.Inject
 
 @HiltViewModel
 @ExperimentalPagingApi
 class HomeViewModel @Inject constructor(
     private val storyRepository: StoryRepository,
-    private val loginPreferences: LoginPreferences
+    private val userRepository: UserRepository
 ): ViewModel() {
 
     fun getStory(token: String): LiveData<PagingData<StoryEntity>> =
         storyRepository.getStory(token).cachedIn(viewModelScope)
-    fun checkIfTokenAvailable(): LiveData<String?> = loginPreferences.getToken()
+    fun checkIfTokenAvailable(): LiveData<String?> = userRepository.getToken()
 
 }
