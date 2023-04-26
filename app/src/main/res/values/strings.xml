@@ -52,6 +52,7 @@
     <string name="placeholder_description">This is the description</string>
     <string name="post_a_picture">Post a picture</string>
     <string name="error_list">An error occurred,  please wait!.</string>
+    <string name="error_occurred">An error has occurred!</string>
 
 
 </resources>
