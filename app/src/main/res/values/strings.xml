@@ -45,5 +45,13 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <!-- Home. -->
+    <string name="retry">Try Again</string>
+    <string name="story_picture">Story picture</string>
+    <string name="placeholder_user">User Name</string>
+    <string name="placeholder_description">This is the description</string>
+    <string name="post_a_picture">Post a picture</string>
+    <string name="error_list">An error occurred,  please wait!.</string>
+
 
 </resources>
