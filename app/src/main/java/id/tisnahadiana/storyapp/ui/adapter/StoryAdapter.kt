@@ -19,6 +19,7 @@ import id.tisnahadiana.storyapp.ui.detail.DetailActivity
 class StoryAdapter  :
     PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
