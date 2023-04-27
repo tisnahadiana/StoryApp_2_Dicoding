@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
     private val binding: ActivityLoginBinding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
     }
-    private val viewModel: LoginViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -55,10 +55,10 @@ class LoginActivity : AppCompatActivity() {
                 else ->
                     lifecycleScope.launchWhenResumed {
                         launch {
-                            viewModel.userLogin(email, password).observe(this@LoginActivity) { result ->
+                            loginViewModel.userLogin(email, password).observe(this@LoginActivity) { result ->
                                 result.onSuccess { credential ->
                                     credential.loginResult?.token?.let { token ->
-                                        viewModel.storeAuthToken(token)
+                                        loginViewModel.storeAuthToken(token)
                                         showLoading(false)
                                         Intent(this@LoginActivity, MainActivity::class.java).also {
                                             startActivity(it)
@@ -97,7 +97,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initialCheck() {
-        viewModel.checkIfFirstTime().observe(this) {
+        loginViewModel.checkIfFirstTime().observe(this) {
             if (it) {
                 val intent = Intent(this, WelcomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

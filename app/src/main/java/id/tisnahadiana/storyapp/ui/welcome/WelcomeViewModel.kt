@@ -28,5 +28,4 @@ class WelcomeViewModel @Inject constructor(
 
     fun checkIfTokenAvailable(): LiveData<String?> = userRepository.getToken()
 
-    fun getAuthToken(): LiveData<String?> = userRepository.getToken()
 }
