@@ -58,4 +58,10 @@
     <string name="expand_description">Expand description</string>
 
 
+    <string name="empty_field">Please fill the %s field!</string>
+    <string name="error_email">Email address is not valid</string>
+    <string name="error_password">Password minimum 6 characters</string>
+    <string name="login_failed_message">Login failed, please try again!</string>
+
+
 </resources>

@@ -3,15 +3,12 @@ package id.tisnahadiana.storyapp.ui.home
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.paging.PagingData
@@ -27,7 +24,6 @@ import id.tisnahadiana.storyapp.ui.detail.DetailActivity
 import id.tisnahadiana.storyapp.ui.detail.DetailActivity.Companion.EXTRA_DETAIL
 import id.tisnahadiana.storyapp.ui.login.LoginActivity
 import id.tisnahadiana.storyapp.ui.main.MainActivity.Companion.EXTRA_TOKEN
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 @ExperimentalPagingApi
@@ -38,12 +34,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
     private lateinit var storyAdapter: StoryAdapter
-    private var token: String = ""
-
-    private val launchPostActivity = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { getStories() }
-
+    private var token: String? = "Token Tidak Ada"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,6 +56,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        token  = requireActivity().intent.getStringExtra(EXTRA_TOKEN)
+
+        binding.tvToken.text = token
 
         binding.buttonAdd.setOnClickListener {
 
@@ -120,7 +115,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun getStories() {
+    private fun getStories(token: String) {
         viewModel.getStory(token).observe(viewLifecycleOwner) {
             updateAdapter(it)
         }
@@ -156,4 +151,5 @@ class HomeFragment : Fragment() {
     fun View.setVisible(visible: Boolean) {
         this.visibility = if (visible) View.VISIBLE else View.GONE
     }
+
 }
