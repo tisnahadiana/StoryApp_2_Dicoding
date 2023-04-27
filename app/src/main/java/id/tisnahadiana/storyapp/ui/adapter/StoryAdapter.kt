@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import id.tisnahadiana.storyapp.R
 import id.tisnahadiana.storyapp.data.local.room.StoryEntity
 import id.tisnahadiana.storyapp.databinding.ItemPostBinding
+import id.tisnahadiana.storyapp.ui.detail.DetailActivity
 
 class StoryAdapter  :
     PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
@@ -46,7 +47,9 @@ class StoryAdapter  :
                 .into(binding.ivImagePost)
 
             binding.cardStory.setOnClickListener {
-
+                val intent = Intent(itemView.context, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_DETAIL, data)
+                itemView.context.startActivity(intent)
             }
         }
     }

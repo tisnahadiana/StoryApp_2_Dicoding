@@ -24,6 +24,5 @@ class HomeViewModel @Inject constructor(
         storyRepository.getStory(token).cachedIn(viewModelScope)
     fun checkIfTokenAvailable(): LiveData<String?> = userRepository.getToken()
 
-    fun geToken(): LiveData<String?> = userRepository.getToken()
 
 }

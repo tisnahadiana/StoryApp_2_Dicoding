@@ -21,7 +21,7 @@ class RegisterActivity : AppCompatActivity() {
         ActivityRegisterBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: RegisterViewModel by viewModels()
+    private val registerViewModel: RegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,7 @@ class RegisterActivity : AppCompatActivity() {
             if (!name.isNullOrEmpty() && !email.isNullOrEmpty() && !password.isNullOrEmpty()) {
                 lifecycleScope.launchWhenResumed {
                     launch {
-                        viewModel.registerUser(name, email, password)
+                        registerViewModel.registerUser(name, email, password)
                             .observe(this@RegisterActivity) { result ->
                                 result.onSuccess {
                                     showMessage(
