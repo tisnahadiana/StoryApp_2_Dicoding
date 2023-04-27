@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/story_picture"
-        android:transitionName="picture"
         android:scaleType="fitCenter"
+        android:transitionName="picture"
         tools:layout_editor_absoluteX="102dp"
         tools:layout_editor_absoluteY="94dp"
         tools:srcCompat="@tools:sample/avatars" />
@@ -26,11 +26,11 @@
         android:layout_height="72dp"
         android:background="@drawable/description_container_dark"
         android:paddingStart="16dp"
-        android:transitionName="description"
         android:paddingTop="32dp"
         android:paddingEnd="16dp"
         android:paddingBottom="16dp"
         android:text="@string/placeholder_description"
+        android:transitionName="description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -40,12 +40,11 @@
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:layout_marginTop="4dp"
+        android:contentDescription="@string/expand_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_description"
         app:layout_constraintTop_toTopOf="@+id/tv_description"
-        app:srcCompat="@drawable/ic_arrow_up"
-        android:contentDescription="@string/expand_description" />
-
+        app:srcCompat="@drawable/ic_arrow_up" />
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
