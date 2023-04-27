@@ -45,5 +45,23 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <!-- Home. -->
+    <string name="retry">Try Again</string>
+    <string name="story_picture">Story picture</string>
+    <string name="placeholder_user">User Name</string>
+    <string name="placeholder_description">This is the description</string>
+    <string name="post_a_picture">Post a picture</string>
+    <string name="error_list">An error occurred,  please wait!.</string>
+    <string name="error_occurred">An error has occurred!</string>
+
+    <!-- Detail. -->
+    <string name="expand_description">Expand description</string>
+
+
+    <string name="empty_field">Please fill the %s field!</string>
+    <string name="error_email">Email address is not valid</string>
+    <string name="error_password">Password minimum 6 characters</string>
+    <string name="login_failed_message">Login failed, please try again!</string>
+
 
 </resources>

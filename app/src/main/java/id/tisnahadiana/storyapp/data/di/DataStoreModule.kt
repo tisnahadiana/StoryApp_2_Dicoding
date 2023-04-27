@@ -15,7 +15,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class DataStoreModule {
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "application")
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "token")
 
     @Provides
     fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> =
