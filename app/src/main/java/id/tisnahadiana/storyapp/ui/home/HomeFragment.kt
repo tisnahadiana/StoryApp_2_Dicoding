@@ -22,8 +22,6 @@ import id.tisnahadiana.storyapp.ui.adapter.LoadingStateAdapter
 import id.tisnahadiana.storyapp.ui.adapter.StoryAdapter
 import id.tisnahadiana.storyapp.ui.detail.DetailActivity
 import id.tisnahadiana.storyapp.ui.detail.DetailActivity.Companion.EXTRA_DETAIL
-import id.tisnahadiana.storyapp.ui.login.LoginActivity
-import id.tisnahadiana.storyapp.ui.main.MainActivity.Companion.EXTRA_TOKEN
 
 @AndroidEntryPoint
 @ExperimentalPagingApi
@@ -34,7 +32,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
     private lateinit var storyAdapter: StoryAdapter
-    private var token: String? = "Token Tidak Ada"
+    private var token: String = "Token Tidak Ada"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,48 +46,45 @@ class HomeFragment : Fragment() {
 
     }
 
-
-    override fun onResume() {
-        super.onResume()
-        checkIfSessionValid()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        token  = requireActivity().intent.getStringExtra(EXTRA_TOKEN)
+        viewModel.checkIfTokenAvailable().observe(viewLifecycleOwner) { token ->
+            this.token = token ?: "Token Tidak Ada"
+            binding.tvToken.text = this.token
+        }
+
+        setRecyclerView()
+        getStories()
+        swipeRefresh()
 
         binding.tvToken.text = token
-
         binding.buttonAdd.setOnClickListener {
 
         }
     }
 
-
-    private fun checkIfSessionValid() {
-        viewModel.checkIfTokenAvailable().observe(requireActivity()) {
-            if (it == "null") {
-                val intent = Intent(requireContext(), LoginActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-            } else {
-                setupRecyclerView("Bearer $it")
-            }
+    private fun swipeRefresh() {
+        binding?.swipe?.setOnRefreshListener { getStories() }
+    }
+    private fun getStories() {
+        viewModel.getStory(token).observe(viewLifecycleOwner) {
+            updateAdapter(it)
         }
     }
 
-    private fun setupRecyclerView(token: String) {
-        binding.swipe.setOnRefreshListener {
-            viewModel.getStory(token).observe(viewLifecycleOwner) { updateAdapter(it) }
-        }
+    private fun updateAdapter(stories: PagingData<StoryEntity>) {
+        storyAdapter.submitData(lifecycle, stories)
+        recyclerView.smoothScrollToPosition(0)
+    }
 
+    private fun setRecyclerView() {
         storyAdapter = StoryAdapter()
         storyAdapter.addLoadStateListener {
             if ((it.source.refresh is LoadState.NotLoading && it.append.endOfPaginationReached && storyAdapter.itemCount < 1) || it.source.refresh is LoadState.Error) showErrorOccurred(true)
             else showErrorOccurred(false)
 
-            binding.swipe.isRefreshing = it.source.refresh is LoadState.Loading
+            binding?.swipe?.isRefreshing = it.source.refresh is LoadState.Loading
         }
         storyAdapter.setOnStartActivityCallback(object : StoryAdapter.OnStartActivityCallback {
             override fun onStartActivityCallback(story: StoryEntity, bundle: Bundle?) {
@@ -101,7 +96,7 @@ class HomeFragment : Fragment() {
         })
 
         try {
-            recyclerView = binding.rvStories
+            recyclerView = binding?.rvStories!!
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = storyAdapter.withLoadStateFooter(
@@ -114,19 +109,6 @@ class HomeFragment : Fragment() {
             e.printStackTrace()
         }
     }
-
-    private fun getStories(token: String) {
-        viewModel.getStory(token).observe(viewLifecycleOwner) {
-            updateAdapter(it)
-        }
-    }
-
-    private fun updateAdapter(stories: PagingData<StoryEntity>) {
-        storyAdapter.submitData(lifecycle, stories)
-        recyclerView.smoothScrollToPosition(0)
-    }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

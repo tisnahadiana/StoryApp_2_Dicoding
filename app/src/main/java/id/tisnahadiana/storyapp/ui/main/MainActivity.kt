@@ -33,7 +33,4 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    companion object {
-        const val EXTRA_TOKEN = "extra_token"
-    }
 }

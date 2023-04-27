@@ -2,6 +2,7 @@ package id.tisnahadiana.storyapp.ui.welcome
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.tisnahadiana.storyapp.data.local.datastore.LoginPreferences
@@ -20,6 +21,12 @@ class WelcomeViewModel @Inject constructor(
             loginPreferences.setFirstTime(firstTime)
         }
     }
+
+    fun checkIfFirstTime(): LiveData<Boolean> {
+        return loginPreferences.isFirstTime().asLiveData()
+    }
+
+    fun checkIfTokenAvailable(): LiveData<String?> = userRepository.getToken()
 
     fun getAuthToken(): LiveData<String?> = userRepository.getToken()
 }
