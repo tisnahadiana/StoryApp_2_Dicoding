@@ -1,7 +1,6 @@
 package id.tisnahadiana.storyapp.ui.home
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +19,6 @@ import id.tisnahadiana.storyapp.data.local.room.StoryEntity
 import id.tisnahadiana.storyapp.databinding.FragmentHomeBinding
 import id.tisnahadiana.storyapp.ui.adapter.LoadingStateAdapter
 import id.tisnahadiana.storyapp.ui.adapter.StoryAdapter
-import id.tisnahadiana.storyapp.ui.detail.DetailActivity
-import id.tisnahadiana.storyapp.ui.detail.DetailActivity.Companion.EXTRA_DETAIL
 
 @AndroidEntryPoint
 @ExperimentalPagingApi
@@ -86,14 +83,6 @@ class HomeFragment : Fragment() {
 
             binding?.swipe?.isRefreshing = it.source.refresh is LoadState.Loading
         }
-        storyAdapter.setOnStartActivityCallback(object : StoryAdapter.OnStartActivityCallback {
-            override fun onStartActivityCallback(story: StoryEntity, bundle: Bundle?) {
-                Intent(requireContext(), DetailActivity::class.java).also {
-                    it.putExtra(EXTRA_DETAIL, story)
-                    startActivity(it, bundle)
-                }
-            }
-        })
 
         try {
             recyclerView = binding?.rvStories!!
