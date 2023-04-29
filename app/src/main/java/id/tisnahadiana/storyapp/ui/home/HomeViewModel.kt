@@ -2,6 +2,7 @@ package id.tisnahadiana.storyapp.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingData
@@ -17,12 +18,17 @@ import javax.inject.Inject
 @ExperimentalPagingApi
 class HomeViewModel @Inject constructor(
     private val storyRepository: StoryRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val loginPreferences: LoginPreferences,
 ): ViewModel() {
 
     fun getStory(token: String): LiveData<PagingData<StoryEntity>> =
         storyRepository.getStory(token).cachedIn(viewModelScope)
     fun checkIfTokenAvailable(): LiveData<String?> = userRepository.getToken()
+
+    fun checkIfFirstTime(): LiveData<Boolean> {
+        return loginPreferences.isFirstTime().asLiveData()
+    }
 
 
 }

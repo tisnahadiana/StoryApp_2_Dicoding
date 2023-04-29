@@ -25,7 +25,10 @@ import id.tisnahadiana.storyapp.databinding.FragmentHomeBinding
 import id.tisnahadiana.storyapp.ui.adapter.LoadingStateAdapter
 import id.tisnahadiana.storyapp.ui.adapter.StoryAdapter
 import id.tisnahadiana.storyapp.ui.camera.CameraActivity
+import id.tisnahadiana.storyapp.ui.login.LoginActivity
+import id.tisnahadiana.storyapp.ui.main.MainActivity
 import id.tisnahadiana.storyapp.ui.post.PostActivity
+import id.tisnahadiana.storyapp.ui.welcome.WelcomeActivity
 
 @AndroidEntryPoint
 @ExperimentalPagingApi
@@ -33,7 +36,7 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
     private lateinit var storyAdapter: StoryAdapter
     private var token: String = "Token Tidak Ada"
@@ -53,7 +56,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.checkIfTokenAvailable().observe(viewLifecycleOwner) { token ->
+        homeViewModel.checkIfTokenAvailable().observe(viewLifecycleOwner) { token ->
             this.token = token ?: "Token Tidak Ada"
             binding.tvToken.text = this.token
         }
@@ -77,12 +80,17 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        getStories()
+    }
+
     private fun swipeRefresh() {
         binding?.swipe?.setOnRefreshListener { getStories() }
     }
 
     private fun getStories() {
-        viewModel.getStory(token).observe(viewLifecycleOwner) {
+        homeViewModel.getStory(token).observe(viewLifecycleOwner) {
             updateAdapter(it)
         }
     }

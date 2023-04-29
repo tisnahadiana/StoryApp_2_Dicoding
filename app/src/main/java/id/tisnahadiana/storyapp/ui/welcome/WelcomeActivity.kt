@@ -24,12 +24,15 @@ class WelcomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+
+        initialCheck()
         hideSystemUI()
         binding.btnGetStarted.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             welcomeViewModel.setFirstTime(false)
             startActivity(intent)
             finish()
+
 
         }
     }

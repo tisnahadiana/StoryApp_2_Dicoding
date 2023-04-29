@@ -31,4 +31,6 @@ class LoginViewModel@Inject constructor(
     fun checkIfFirstTime(): LiveData<Boolean> {
         return loginPreferences.isFirstTime().asLiveData()
     }
+
+    fun checkIfTokenAvailable(): LiveData<String?> = userRepository.getToken()
 }

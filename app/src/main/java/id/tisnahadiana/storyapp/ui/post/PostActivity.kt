@@ -1,6 +1,7 @@
 package id.tisnahadiana.storyapp.ui.post
 
 import android.Manifest
+import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -21,6 +22,7 @@ import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.AndroidEntryPoint
 import id.tisnahadiana.storyapp.R
 import id.tisnahadiana.storyapp.databinding.ActivityPostBinding
+import id.tisnahadiana.storyapp.ui.login.LoginActivity
 import id.tisnahadiana.storyapp.ui.main.MainActivity
 import id.tisnahadiana.storyapp.utils.AppExecutors
 import id.tisnahadiana.storyapp.utils.reduceFileImage
@@ -78,6 +80,21 @@ class PostActivity : AppCompatActivity() {
         bindResult()
         setupButtons()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkIfSessionValid()
+    }
+
+    private fun checkIfSessionValid() {
+        postViewModel.checkIfTokenAvailable().observe(this) {
+            if (it == "null") {
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
+        }
     }
 
     private fun setupButtons() {
@@ -161,7 +178,7 @@ class PostActivity : AppCompatActivity() {
     private fun getLocation() {
         if (
             ContextCompat.checkSelfPermission(
-                this@PostActivity, Manifest.permission.ACCESS_COARSE_LOCATION
+                this@PostActivity, ACCESS_COARSE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             fusedLocationProviderClient.lastLocation.addOnSuccessListener {
@@ -171,7 +188,7 @@ class PostActivity : AppCompatActivity() {
                     binding.switchLocation.isChecked = false
                 }
             }
-        } else requestPermissionLauncher.launch(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION))
+        } else requestPermissionLauncher.launch(arrayOf(ACCESS_COARSE_LOCATION))
     }
 
     private fun showLoading(isLoading: Boolean) {
