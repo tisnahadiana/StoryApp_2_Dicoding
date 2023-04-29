@@ -24,8 +24,6 @@ class WelcomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
-        initialCheck()
         hideSystemUI()
         binding.btnGetStarted.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -33,8 +31,12 @@ class WelcomeActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
 
-
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initialCheck()
     }
 
     private fun initialCheck() {
