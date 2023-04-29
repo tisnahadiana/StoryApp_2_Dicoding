@@ -19,7 +19,6 @@ import id.tisnahadiana.storyapp.ui.detail.DetailActivity
 class StoryAdapter  :
     PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
-    private lateinit var onStartActivityCallback: OnStartActivityCallback
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -52,14 +51,6 @@ class StoryAdapter  :
                 itemView.context.startActivity(intent)
             }
         }
-    }
-
-    fun setOnStartActivityCallback(onStartActivityCallback: OnStartActivityCallback) {
-        this.onStartActivityCallback = onStartActivityCallback
-    }
-
-    interface OnStartActivityCallback {
-        fun onStartActivityCallback(story: StoryEntity, bundle: Bundle?)
     }
 
     companion object {

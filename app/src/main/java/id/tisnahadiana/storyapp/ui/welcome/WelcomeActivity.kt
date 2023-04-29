@@ -37,6 +37,11 @@ class WelcomeActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        initialCheck()
+    }
+
     private fun initialCheck() {
         welcomeViewModel.checkIfFirstTime().observe(this) {
             if (it) {

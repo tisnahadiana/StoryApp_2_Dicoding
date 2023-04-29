@@ -53,6 +53,7 @@
     <string name="post_a_picture">Post a picture</string>
     <string name="error_list">An error occurred,  please wait!.</string>
     <string name="error_occurred">An error has occurred!</string>
+    <string name="permission_needed">Permission needed to use camera</string>
 
     <!-- Detail. -->
     <string name="expand_description">Expand description</string>
@@ -62,6 +63,25 @@
     <string name="error_email">Email address is not valid</string>
     <string name="error_password">Password minimum 6 characters</string>
     <string name="login_failed_message">Login failed, please try again!</string>
+
+    <!-- Camera. -->
+    <string name="take_picture">Take picture</string>
+    <string name="rotate_camera">Rotate camera</string>
+    <string name="open_gallery">Open gallery</string>
+    <string name="wait_for_processing">Wait until processing is done</string>
+    <string name="failed_capture_image">Failed to capture image</string>
+    <string name="camera_failed">Failed to open camera</string>
+
+    <!-- Post. -->
+    <string name="post">Post</string>
+    <string name="enter_description">Enter a description</string>
+    <string name="post_the_picture">Post the picture</string>
+    <string name="expand_image">Expand image</string>
+    <string name="description_cannot_empty">Description cannot be empty</string>
+    <string name="image_posted">Image has been posted</string>
+    <string name="please_active_location">Please activate your location service!</string>
+    <string name="upload_success">Story uploaded successfully!</string>
+    <string name="upload_failed">Story failed to upload!</string>
 
 
 </resources>
