@@ -54,7 +54,7 @@ class PostActivity : AppCompatActivity() {
     }
 
 
-    private var  file: File? = null
+    private var file: File? = null
     private var isBack: Boolean = true
     private var reducingDone: Boolean = false
     private var location: Location? = null
