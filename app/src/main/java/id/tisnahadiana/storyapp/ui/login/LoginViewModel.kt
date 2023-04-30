@@ -12,10 +12,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel@Inject constructor(
+class LoginViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val loginPreferences: LoginPreferences,
-): ViewModel() {
+) : ViewModel() {
 
     suspend fun userLogin(email: String, password: String): LiveData<Result<LoginResponse>> =
         userRepository.userLogin(email, password)
