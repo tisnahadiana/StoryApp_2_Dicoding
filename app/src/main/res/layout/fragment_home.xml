@@ -44,7 +44,7 @@
         android:id="@+id/tv_token"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:paddingHorizontal="24dp"
         android:text="@string/error_list"
         android:textColor="@color/blue_255"
