@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.os.Environment
+import androidx.test.espresso.idling.CountingIdlingResource
 import id.tisnahadiana.storyapp.R
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -80,4 +81,22 @@ fun reduceFileImage(file: File): File {
     } while (streamLength > 1000000)
     bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
     return file
+}
+
+object EspressoIdlingResource {
+    private const val RESOURCE_KEY = "GLOBAL"
+    private val countingIdlingResource = CountingIdlingResource(RESOURCE_KEY)
+
+    fun increment() { countingIdlingResource.increment() }
+
+    fun decrement() { countingIdlingResource.decrement() }
+}
+
+inline fun <T> wrapEspressoIdlingResource(function: () -> T): T {
+    EspressoIdlingResource.increment()
+    return try {
+        function()
+    } finally {
+        EspressoIdlingResource.decrement()
+    }
 }

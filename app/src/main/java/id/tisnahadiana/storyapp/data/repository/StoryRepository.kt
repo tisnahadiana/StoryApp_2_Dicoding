@@ -11,6 +11,7 @@ import id.tisnahadiana.storyapp.data.local.room.StoryRemoteMediator
 import id.tisnahadiana.storyapp.data.remote.responses.AddResponse
 import id.tisnahadiana.storyapp.data.remote.responses.StoriesResponse
 import id.tisnahadiana.storyapp.data.remote.retrofit.ApiService
+import id.tisnahadiana.storyapp.utils.wrapEspressoIdlingResource
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -44,13 +45,15 @@ class StoryRepository @Inject constructor(
         ).liveData
 
     fun getStoryLocation(token: String): LiveData<Result<StoriesResponse>> = liveData {
-        try {
-            val bearerToken = generateToken(token)
-            val response = apiService.getStories(bearerToken, size = 30, location = 1)
-            emit(Result.success(response))
-        } catch (e: Exception) {
-            e.printStackTrace()
-            emit(Result.failure(e))
+        wrapEspressoIdlingResource {
+            try {
+                val bearerToken = generateToken(token)
+                val response = apiService.getStories(bearerToken, size = 30, location = 1)
+                emit(Result.success(response))
+            } catch (e: Exception) {
+                e.printStackTrace()
+                emit(Result.failure(e))
+            }
         }
     }
 
