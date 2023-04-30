@@ -6,7 +6,7 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import id.tisnahadiana.storyapp.R
 
-class PasswordEditText : CustomEditText{
+class PasswordEditText : CustomEditText {
     constructor(context: Context) : super(context) {
         init()
     }

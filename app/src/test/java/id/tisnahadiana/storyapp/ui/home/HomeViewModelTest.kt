@@ -30,7 +30,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 @ExperimentalCoroutinesApi
 @ExperimentalPagingApi
-class HomeViewModelTest{
+class HomeViewModelTest {
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
@@ -39,6 +39,7 @@ class HomeViewModelTest{
 
     @Mock
     private lateinit var storyRepository: StoryRepository
+
     @Mock
     private lateinit var userRepository: UserRepository
 
@@ -46,7 +47,7 @@ class HomeViewModelTest{
 
     @Before
     fun setup() {
-        homeViewModel = HomeViewModel(storyRepository,userRepository)
+        homeViewModel = HomeViewModel(storyRepository, userRepository)
     }
 
     private val dummyToken = DataDummy.DUMMY_TOKEN

@@ -1,6 +1,5 @@
 package id.tisnahadiana.storyapp.ui.map
 
-import android.Manifest
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.content.Context
 import android.content.pm.PackageManager
@@ -120,7 +119,12 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                             }
                         }
                     }
-                    result.onFailure { showToast(requireContext(), getString(R.string.error_occurred)) }
+                    result.onFailure {
+                        showToast(
+                            requireContext(),
+                            getString(R.string.error_occurred)
+                        )
+                    }
                 }
             }
         }

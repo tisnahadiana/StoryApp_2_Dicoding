@@ -2,7 +2,7 @@ package id.tisnahadiana.storyapp.data.remote.responses
 
 import com.google.gson.annotations.SerializedName
 
-data class AddResponse (
+data class AddResponse(
     @field:SerializedName("error")
     val error: Boolean? = null,
 

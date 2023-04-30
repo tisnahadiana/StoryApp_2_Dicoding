@@ -23,7 +23,7 @@ class PostViewModel @Inject constructor(
         description: String,
         lat: RequestBody?,
         lon: RequestBody?
-    ) : LiveData<Result<AddResponse>> =
+    ): LiveData<Result<AddResponse>> =
         storyRepository.postStory(token, imageFile, description, lat, lon)
 
     fun checkIfTokenAvailable(): LiveData<String?> {

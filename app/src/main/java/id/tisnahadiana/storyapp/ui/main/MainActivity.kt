@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import id.tisnahadiana.storyapp.R
 import id.tisnahadiana.storyapp.databinding.ActivityMainBinding
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 

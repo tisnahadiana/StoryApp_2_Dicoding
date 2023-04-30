@@ -1,8 +1,6 @@
 package id.tisnahadiana.storyapp.utils
 
 import id.tisnahadiana.storyapp.data.local.room.StoryEntity
-import id.tisnahadiana.storyapp.data.remote.responses.*
-import id.tisnahadiana.storyapp.data.remote.responses.StoryEntity as StoryEntityResponse
 
 object DataDummy {
     const val DUMMY_TOKEN = "auth_token"

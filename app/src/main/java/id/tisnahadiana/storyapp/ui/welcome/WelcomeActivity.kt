@@ -24,16 +24,12 @@ class WelcomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
-        initialCheck()
         hideSystemUI()
         binding.btnGetStarted.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             welcomeViewModel.setFirstTime(false)
             startActivity(intent)
             finish()
-
-
         }
     }
 
@@ -43,24 +39,21 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun initialCheck() {
-        welcomeViewModel.checkIfFirstTime().observe(this) {
-            if (it) {
-                // Still in Welcome Activity
-            } else{
-                checkIfSessionValid()
-            }
-        }
-    }
-
-    private fun checkIfSessionValid() {
-        welcomeViewModel.checkIfTokenAvailable().observe(this@WelcomeActivity) { token ->
-            val intent = if (token.isNullOrEmpty()) {
-                Intent(this@WelcomeActivity, LoginActivity::class.java)
+        welcomeViewModel.checkIfFirstTime().observe(this) { isFirstTime ->
+            if (isFirstTime) {
+                // masih di layar welcome
             } else {
-                Intent(this@WelcomeActivity, MainActivity::class.java)
+                welcomeViewModel.checkIfTokenAvailable().observe(this@WelcomeActivity) { token ->
+                    if (token.isNullOrEmpty()) {
+                        val intent = Intent(this@WelcomeActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        val mainIntent = Intent(this@WelcomeActivity, MainActivity::class.java)
+                        startActivity(mainIntent)
+                    }
+                    finish()
+                }
             }
-            startActivity(intent)
-            finish()
         }
     }
 

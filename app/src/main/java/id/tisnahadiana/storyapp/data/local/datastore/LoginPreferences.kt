@@ -14,11 +14,13 @@ class LoginPreferences @Inject constructor(
 
     fun getToken(): LiveData<String?> = dataStore.data.map { it[TOKEN_KEY] }.asLiveData()
 
-    suspend fun saveToken(token: String) { dataStore.edit { it[TOKEN_KEY] = token } }
+    suspend fun saveToken(token: String) {
+        dataStore.edit { it[TOKEN_KEY] = token }
+    }
 
     suspend fun deleteToken() {
         dataStore.edit {
-            it[TOKEN_KEY] = "null"
+            it[TOKEN_KEY] = ""
         }
     }
 

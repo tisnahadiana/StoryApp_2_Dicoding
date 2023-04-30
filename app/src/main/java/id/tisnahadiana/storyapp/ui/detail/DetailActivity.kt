@@ -7,12 +7,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import id.tisnahadiana.storyapp.R
 import id.tisnahadiana.storyapp.data.local.room.StoryEntity
 import id.tisnahadiana.storyapp.databinding.ActivityDetailBinding
+
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
     private val binding: ActivityDetailBinding by lazy {
         ActivityDetailBinding.inflate(layoutInflater)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)

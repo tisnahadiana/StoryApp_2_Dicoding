@@ -44,32 +44,45 @@ class LoginActivity : AppCompatActivity() {
 
             when {
                 email.isEmpty() ->
-                    showInputError(binding.edLoginEmail, getString(R.string.empty_field, getString(R.string.email)))
+                    showInputError(
+                        binding.edLoginEmail,
+                        getString(R.string.empty_field, getString(R.string.email))
+                    )
                 !Patterns.EMAIL_ADDRESS.matcher(email).matches() ->
                     showInputError(binding.edLoginEmail, getString(R.string.error_email))
                 password.isEmpty() ->
-                    showInputError(binding.edLoginPassword, getString(R.string.empty_field, getString(R.string.password)))
+                    showInputError(
+                        binding.edLoginPassword,
+                        getString(R.string.empty_field, getString(R.string.password))
+                    )
                 password.length < 6 ->
                     showInputError(binding.edLoginPassword, getString(R.string.error_password))
                 else ->
                     lifecycleScope.launchWhenResumed {
                         launch {
-                            loginViewModel.userLogin(email, password).observe(this@LoginActivity) { result ->
-                                result.onSuccess { credential ->
-                                    credential.loginResult?.token?.let { token ->
-                                        loginViewModel.storeAuthToken(token)
-                                        showLoading(false)
-                                        Intent(this@LoginActivity, MainActivity::class.java).also {
-                                            startActivity(it)
-                                            finish()
+                            loginViewModel.userLogin(email, password)
+                                .observe(this@LoginActivity) { result ->
+                                    result.onSuccess { credential ->
+                                        credential.loginResult?.token?.let { token ->
+                                            loginViewModel.storeAuthToken(token)
+                                            showLoading(false)
+                                            Intent(
+                                                this@LoginActivity,
+                                                MainActivity::class.java
+                                            ).also {
+                                                startActivity(it)
+                                                finish()
+                                            }
                                         }
                                     }
+                                    result.onFailure {
+                                        showToast(
+                                            this@LoginActivity,
+                                            getString(R.string.login_failed_message)
+                                        )
+                                        showLoading(false)
+                                    }
                                 }
-                                result.onFailure {
-                                    showToast(this@LoginActivity, getString(R.string.login_failed_message))
-                                    showLoading(false)
-                                }
-                            }
                         }
                     }
             }
@@ -86,6 +99,7 @@ class LoginActivity : AppCompatActivity() {
         editText?.error = message
         showToast(this@LoginActivity, message)
     }
+
     fun showToast(context: Context, message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
@@ -96,8 +110,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initialCheck() {
-        loginViewModel.checkIfFirstTime().observe(this) {
-            if (it) {
+        loginViewModel.checkIfFirstTime().observe(this) { isFirstTime ->
+            if (isFirstTime) {
                 val intent = Intent(this, WelcomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
@@ -105,7 +119,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun showLoading(isLoading: Boolean) {
         binding.apply {
             edLoginEmail.isEnabled = !isLoading

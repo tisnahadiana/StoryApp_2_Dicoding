@@ -6,10 +6,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import id.tisnahadiana.storyapp.data.local.datastore.LoginPreferences
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val loginPreferences: LoginPreferences
-): ViewModel() {
+) : ViewModel() {
     fun logout() {
         viewModelScope.launch { loginPreferences.deleteToken() }
     }

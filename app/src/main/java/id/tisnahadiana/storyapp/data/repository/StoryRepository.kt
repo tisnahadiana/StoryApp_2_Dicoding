@@ -1,8 +1,6 @@
 package id.tisnahadiana.storyapp.data.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.liveData
 import androidx.paging.*
 import id.tisnahadiana.storyapp.data.local.room.StoryDatabase
@@ -18,9 +16,6 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.io.File
 import javax.inject.Inject
 

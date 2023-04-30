@@ -1,12 +1,8 @@
 package id.tisnahadiana.storyapp.ui.adapter
 
-import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +12,7 @@ import id.tisnahadiana.storyapp.data.local.room.StoryEntity
 import id.tisnahadiana.storyapp.databinding.ItemPostBinding
 import id.tisnahadiana.storyapp.ui.detail.DetailActivity
 
-class StoryAdapter  :
+class StoryAdapter :
     PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
 

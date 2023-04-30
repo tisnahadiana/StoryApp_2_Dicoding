@@ -11,7 +11,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
 import id.tisnahadiana.storyapp.R
 
-class ButtonCustom   @JvmOverloads constructor(
+class ButtonCustom @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -29,7 +29,12 @@ class ButtonCustom   @JvmOverloads constructor(
         // Set rounded corners for the button
         val backgroundDrawable = ColorDrawable(defaultColor)
         background = backgroundDrawable
-        setPadding(cornerRadius.toInt(), cornerRadius.toInt(), cornerRadius.toInt(), cornerRadius.toInt())
+        setPadding(
+            cornerRadius.toInt(),
+            cornerRadius.toInt(),
+            cornerRadius.toInt(),
+            cornerRadius.toInt()
+        )
 
         // Set listener to animate color change on press
         setOnTouchListener { _, event ->

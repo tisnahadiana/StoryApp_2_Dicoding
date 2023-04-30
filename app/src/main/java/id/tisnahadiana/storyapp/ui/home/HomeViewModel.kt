@@ -17,10 +17,11 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val storyRepository: StoryRepository,
     private val userRepository: UserRepository,
-): ViewModel() {
+) : ViewModel() {
 
     fun getStory(token: String): LiveData<PagingData<StoryEntity>> =
         storyRepository.getStory(token).cachedIn(viewModelScope)
+
     fun checkIfTokenAvailable(): LiveData<String?> = userRepository.getToken()
 
 

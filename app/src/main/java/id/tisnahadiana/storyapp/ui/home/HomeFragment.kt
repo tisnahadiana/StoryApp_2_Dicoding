@@ -27,8 +27,6 @@ import id.tisnahadiana.storyapp.ui.adapter.StoryAdapter
 import id.tisnahadiana.storyapp.ui.camera.CameraActivity
 import id.tisnahadiana.storyapp.ui.login.LoginActivity
 import id.tisnahadiana.storyapp.ui.main.MainActivity
-import id.tisnahadiana.storyapp.ui.post.PostActivity
-import id.tisnahadiana.storyapp.ui.welcome.WelcomeActivity
 
 @AndroidEntryPoint
 @ExperimentalPagingApi
@@ -62,7 +60,6 @@ class HomeFragment : Fragment() {
         }
 
         setRecyclerView()
-        getStories()
         swipeRefresh()
 
         binding.tvToken.text = token
@@ -82,7 +79,18 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        checkIfSessionValid()
         getStories()
+    }
+
+    private fun checkIfSessionValid() {
+        homeViewModel.checkIfTokenAvailable().observe(viewLifecycleOwner) { token ->
+            if (token.isNullOrEmpty()) {
+                val intent = Intent(requireContext(), LoginActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
+            }
+        }
     }
 
     private fun swipeRefresh() {

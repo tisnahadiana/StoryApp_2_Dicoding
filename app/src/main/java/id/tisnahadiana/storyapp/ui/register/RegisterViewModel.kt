@@ -8,9 +8,9 @@ import id.tisnahadiana.storyapp.data.repository.UserRepository
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel  @Inject constructor(
+class RegisterViewModel @Inject constructor(
     private val userRepository: UserRepository
-): ViewModel() {
+) : ViewModel() {
     suspend fun registerUser(
         name: String, email: String, password: String
     ): LiveData<Result<RegisterResponse>> = userRepository.userRegister(name, email, password)

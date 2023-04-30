@@ -6,7 +6,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import id.tisnahadiana.storyapp.data.local.room.StoryEntity
 
-class PagingDataSourceTest : PagingSource<Int, LiveData<List<StoryEntity>>>(){
+class PagingDataSourceTest : PagingSource<Int, LiveData<List<StoryEntity>>>() {
     override fun getRefreshKey(state: PagingState<Int, LiveData<List<StoryEntity>>>): Int = 0
 
     override suspend fun load(params: PagingSource.LoadParams<Int>): PagingSource.LoadResult<Int, LiveData<List<StoryEntity>>> =

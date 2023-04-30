@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">Story App</string>
+    <string name="title_home">Beranda</string>
+    <string name="title_map">Peta</string>
+    <string name="title_settings">Pengaturan</string>
+
+    <!-- CustomView. -->
+    <string name="name_cannot_empty">Nama tidak boleh kosong</string>
+    <string name="valid_email">Mohon masukan email yang valid</string>
+    <string name="email_cannot_empty">Email tidak boleh kosong</string>
+    <string name="password_minimum">Password terdiri dari minimal 6 karakter</string>
+
+    <!-- Welcome. -->
+    <string name="welcome">Selamat Datang!</string>
+    <string name="greeting">Bergabunglah dengan kami dan nikmati cerita Anda di dunia yang penuh warna!</string>
+    <string name="greeting1">Lihat apa yang sedang dilakukan teman Anda!</string>
+    <string name="greeting2">Ekspresikan dirimu!</string>
+    <string name="greeting_picture">Gambar salam</string>
+    <string name="get_started">Memulai</string>
+
+    <!-- Login. -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="login">Masuk</string>
+    <string name="or">atau</string>
+    <string name="register">Daftar</string>
+    <string name="register_an_account">Daftar sebuah account</string>
+    <string name="login_failed">Masuk gagal, mohon coba lagi!</string>
+    <string name="login_success">Masuk berhasil!</string>
+
+    <string name="join_us">Bergabung dengan kami!</string>
+    <string name="introduction">Jelajahi dunia cerita Anda untuk mewarnai dunia ini dengan cerita Anda!</string>
+    <string name="register_this_account">Daftar akun ini</string>
+    <string name="have_account">Sudah mempunyai account?</string>
+    <string name="login_instead">Masuk saja</string>
+    <string name="register_success">Registrasi Berhasil!</string>
+    <string name="register_failed">Registrasi gagal!</string>
+    <string name="setting_language">Atur Bahasa</string>
+    <string name="logout">Keluar</string>
+
+    <!-- Settings. -->
+    <string name="settings_title">Pengaturan</string>
+    <string name="logout_confirmation">Kamu yakin ingin keluar?</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+
+    <!-- Home. -->
+    <string name="retry">Coba Lagi</string>
+    <string name="story_picture">Foto Story</string>
+    <string name="placeholder_user">Nama belakang</string>
+    <string name="placeholder_description">Ini adalah deskripsi</string>
+    <string name="post_a_picture">Posting sebuah foto</string>
+    <string name="error_list">Ada masalah,  mohon tunggu!.</string>
+    <string name="error_occurred">Ada masalah!</string>
+    <string name="permission_needed">Izin diperlukan untuk menggunakan kamera</string>
+
+    <!-- Detail. -->
+    <string name="expand_description">Luaskan deskripsi</string>
+
+
+    <string name="empty_field">Harap isi bagian %s !</string>
+    <string name="error_email">Alamat email tidak valid</string>
+    <string name="error_password">Password minimal 6 karakter</string>
+    <string name="login_failed_message">Masuk gagal, mohon coba lagi!</string>
+
+    <!-- Camera. -->
+    <string name="take_picture">Ambil foto</string>
+    <string name="rotate_camera">Putar camera</string>
+    <string name="open_gallery">Buka gallery</string>
+    <string name="wait_for_processing">Tunggu sampai proses selesai</string>
+    <string name="failed_capture_image">Gagal untuk menangkap gambar</string>
+    <string name="camera_failed">Gagal membuka camera</string>
+
+    <!-- Post. -->
+    <string name="post">Posting</string>
+    <string name="enter_description">Masukkan sebuah deskripsi</string>
+    <string name="post_the_picture">Posting sebuah gambar</string>
+    <string name="expand_image">Perbesar Gambar</string>
+    <string name="description_cannot_empty">Deskripsi tidak boleh kosong</string>
+    <string name="image_posted">Foto sudah terposting</string>
+    <string name="please_active_location">Mohon aktifkan layanan lokasi anda!</string>
+    <string name="upload_success">Story sukses terupload!</string>
+    <string name="upload_failed">Story gagal terupload!</string>
+    <string name="on_location">Turn on Location</string>
+
+</resources>
