@@ -25,6 +25,7 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
+import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
@@ -47,6 +48,7 @@ class HomeViewModelTest {
 
     @Before
     fun setup() {
+        MockitoAnnotations.openMocks(this)
         homeViewModel = HomeViewModel(storyRepository, userRepository)
     }
 
@@ -88,11 +90,13 @@ class HomeViewModelTest {
     fun `Get all stories, no data is returned`() = runTest {
         val emptyList = emptyList<StoryEntity>()
         val emptyData = PagingDataSourceTest.snapshot(emptyList)
+
         val stories = MutableLiveData<PagingData<StoryEntity>>()
         stories.value = emptyData
         `when`(storyRepository.getStory(dummyToken)).thenReturn(stories)
 
         val actualStories = homeViewModel.getStory(dummyToken).getOrAwaitValue()
+
         Mockito.verify(storyRepository).getStory(dummyToken)
 
         val differ = AsyncPagingDataDiffer(
