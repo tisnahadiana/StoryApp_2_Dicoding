@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import id.tisnahadiana.storyapp.R
 import id.tisnahadiana.storyapp.databinding.ActivityLoginBinding
-import id.tisnahadiana.storyapp.databinding.FragmentHomeBinding
 import id.tisnahadiana.storyapp.ui.main.MainActivity
 import id.tisnahadiana.storyapp.ui.register.RegisterActivity
 import id.tisnahadiana.storyapp.ui.welcome.WelcomeActivity
