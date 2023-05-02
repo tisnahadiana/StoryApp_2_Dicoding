@@ -82,8 +82,7 @@ class HomeViewModelTest {
 
         Assert.assertNotNull(differ.snapshot())
         Assert.assertEquals(dummyStories.size, differ.snapshot().size)
-        Assert.assertEquals(dummyStories.first().id, differ.snapshot().first()?.id)
-        //saya asumsikan data pertama yang dikembalikan ini adalah id pada DataDummy
+        Assert.assertEquals(dummyStories.first(), differ.snapshot().first())
     }
 
     @Test

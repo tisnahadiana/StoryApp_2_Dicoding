@@ -15,7 +15,7 @@ import id.tisnahadiana.storyapp.ui.detail.DetailActivity
 class StoryAdapter :
     PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
-
+    private var lastPosition = RecyclerView.NO_POSITION
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
@@ -25,6 +25,23 @@ class StoryAdapter :
         val data = getItem(position)
         if (data != null) {
             holder.bind(data)
+        }
+    }
+
+    override fun onViewDetachedFromWindow(holder: MyViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        if (holder.bindingAdapterPosition == itemCount - 1) {
+            lastPosition = itemCount - 1
+        }
+    }
+
+    override fun onViewAttachedToWindow(holder: MyViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        if (holder.bindingAdapterPosition == lastPosition) {
+            holder.itemView.post {
+                holder.itemView.requestFocus()
+                holder.itemView.requestFocusFromTouch()
+            }
         }
     }
 

@@ -8,7 +8,7 @@
     <string name="name_cannot_empty">Name cannot be empty</string>
     <string name="valid_email">Please input a valid email</string>
     <string name="email_cannot_empty">Email cannot be empty</string>
-    <string name="password_minimum">Password must consist of minimum 6 characters</string>
+    <string name="password_minimum">Password must consist of minimum 8 characters</string>
 
     <!-- Welcome. -->
     <string name="welcome">Welcome!</string>
@@ -61,7 +61,7 @@
 
     <string name="empty_field">Please fill the %s field!</string>
     <string name="error_email">Email address is not valid</string>
-    <string name="error_password">Password minimum 6 characters</string>
+    <string name="error_password">Password minimum 8 characters</string>
     <string name="login_failed_message">Login failed, please try again!</string>
 
     <!-- Camera. -->

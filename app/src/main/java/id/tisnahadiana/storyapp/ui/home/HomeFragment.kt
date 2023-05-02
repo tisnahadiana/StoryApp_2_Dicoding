@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var storyAdapter: StoryAdapter
     private var token: String = "Token Tidak Ada"
+    private var lastVisiblePosition: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,8 +60,10 @@ class HomeFragment : Fragment() {
             binding.tvToken.text = this.token
         }
 
+
         setRecyclerView()
         swipeRefresh()
+        getStories()
 
         binding.tvToken.text = token
         binding.buttonAdd.setOnClickListener {
@@ -80,7 +83,16 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         checkIfSessionValid()
-        getStories()
+        if (::recyclerView.isInitialized && lastVisiblePosition != RecyclerView.NO_POSITION) {
+            recyclerView.scrollToPosition(lastVisiblePosition)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (::recyclerView.isInitialized) {
+            lastVisiblePosition = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+        }
     }
 
     private fun checkIfSessionValid() {
@@ -105,7 +117,7 @@ class HomeFragment : Fragment() {
 
     private fun updateAdapter(stories: PagingData<StoryEntity>) {
         storyAdapter.submitData(lifecycle, stories)
-        recyclerView.smoothScrollToPosition(0)
+        recyclerView.scrollToPosition(0)
     }
 
     private fun setRecyclerView() {
@@ -128,6 +140,12 @@ class HomeFragment : Fragment() {
                         storyAdapter.retry()
                     }
                 )
+                addOnLayoutChangeListener { _, _, _, _, bottom, _, _, _, oldBottom ->
+                    if (bottom < oldBottom) {
+                        lastVisiblePosition =
+                            (layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                    }
+                }
             }
         } catch (e: NullPointerException) {
             e.printStackTrace()

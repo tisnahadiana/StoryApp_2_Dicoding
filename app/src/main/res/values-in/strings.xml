@@ -8,7 +8,7 @@
     <string name="name_cannot_empty">Nama tidak boleh kosong</string>
     <string name="valid_email">Mohon masukan email yang valid</string>
     <string name="email_cannot_empty">Email tidak boleh kosong</string>
-    <string name="password_minimum">Password terdiri dari minimal 6 karakter</string>
+    <string name="password_minimum">Password terdiri dari minimal 8 karakter</string>
 
     <!-- Welcome. -->
     <string name="welcome">Selamat Datang!</string>
@@ -61,7 +61,7 @@
 
     <string name="empty_field">Harap isi bagian %s !</string>
     <string name="error_email">Alamat email tidak valid</string>
-    <string name="error_password">Password minimal 6 karakter</string>
+    <string name="error_password">Password minimal 8 karakter</string>
     <string name="login_failed_message">Masuk gagal, mohon coba lagi!</string>
 
     <!-- Camera. -->

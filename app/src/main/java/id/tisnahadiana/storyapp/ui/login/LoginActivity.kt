@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
                         binding.edLoginPassword,
                         getString(R.string.empty_field, getString(R.string.password))
                     )
-                password.length < 6 ->
+                password.length < 8 ->
                     showInputError(binding.edLoginPassword, getString(R.string.error_password))
                 else ->
                     lifecycleScope.launchWhenResumed {
