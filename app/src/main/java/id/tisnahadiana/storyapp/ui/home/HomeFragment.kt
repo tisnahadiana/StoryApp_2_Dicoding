@@ -26,7 +26,6 @@ import id.tisnahadiana.storyapp.ui.adapter.LoadingStateAdapter
 import id.tisnahadiana.storyapp.ui.adapter.StoryAdapter
 import id.tisnahadiana.storyapp.ui.camera.CameraActivity
 import id.tisnahadiana.storyapp.ui.login.LoginActivity
-import id.tisnahadiana.storyapp.ui.main.MainActivity
 
 @AndroidEntryPoint
 @ExperimentalPagingApi
@@ -117,7 +116,6 @@ class HomeFragment : Fragment() {
 
     private fun updateAdapter(stories: PagingData<StoryEntity>) {
         storyAdapter.submitData(lifecycle, stories)
-        recyclerView.scrollToPosition(0)
     }
 
     private fun setRecyclerView() {
