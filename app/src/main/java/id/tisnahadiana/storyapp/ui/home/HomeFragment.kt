@@ -59,7 +59,6 @@ class HomeFragment : Fragment() {
             binding.tvToken.text = this.token
         }
 
-
         setRecyclerView()
         swipeRefresh()
         getStories()
@@ -90,7 +89,8 @@ class HomeFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         if (::recyclerView.isInitialized) {
-            lastVisiblePosition = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+            lastVisiblePosition =
+                (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
         }
     }
 
