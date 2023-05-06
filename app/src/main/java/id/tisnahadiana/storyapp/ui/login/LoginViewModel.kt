@@ -20,8 +20,6 @@ class LoginViewModel @Inject constructor(
     suspend fun userLogin(email: String, password: String): LiveData<Result<LoginResponse>> =
         userRepository.userLogin(email, password)
 
-    fun getAuthToken(): LiveData<String?> = userRepository.getToken()
-
     fun storeAuthToken(token: String) {
         viewModelScope.launch {
             loginPreferences.saveToken(token)
@@ -32,5 +30,4 @@ class LoginViewModel @Inject constructor(
         return loginPreferences.isFirstTime().asLiveData()
     }
 
-    fun checkIfTokenAvailable(): LiveData<String?> = userRepository.getToken()
 }

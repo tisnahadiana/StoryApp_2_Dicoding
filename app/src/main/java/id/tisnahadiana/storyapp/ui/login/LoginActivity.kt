@@ -42,49 +42,52 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.edLoginEmail.text.toString().trim()
             val password = binding.edLoginPassword.text.toString().trim()
 
-            when {
-                email.isEmpty() ->
-                    showInputError(
-                        binding.edLoginEmail,
-                        getString(R.string.empty_field, getString(R.string.email))
-                    )
-                !Patterns.EMAIL_ADDRESS.matcher(email).matches() ->
-                    showInputError(binding.edLoginEmail, getString(R.string.error_email))
-                password.isEmpty() ->
-                    showInputError(
-                        binding.edLoginPassword,
-                        getString(R.string.empty_field, getString(R.string.password))
-                    )
-                password.length < 8 ->
-                    showInputError(binding.edLoginPassword, getString(R.string.error_password))
-                else ->
-                    lifecycleScope.launchWhenResumed {
-                        launch {
-                            loginViewModel.userLogin(email, password)
-                                .observe(this@LoginActivity) { result ->
-                                    result.onSuccess { credential ->
-                                        credential.loginResult?.token?.let { token ->
-                                            loginViewModel.storeAuthToken(token)
-                                            showLoading(false)
-                                            Intent(
-                                                this@LoginActivity,
-                                                MainActivity::class.java
-                                            ).also {
-                                                startActivity(it)
-                                                finish()
-                                            }
+            binding.edLoginEmail.error = if (email.isEmpty()) {
+                getString(R.string.empty_field, getString(R.string.email))
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                getString(R.string.error_email)
+            } else {
+                null
+            }
+
+            binding.edLoginPassword.error = if (password.isEmpty()) {
+                getString(R.string.empty_field, getString(R.string.password))
+            } else if (password.length < 8) {
+                getString(R.string.error_password)
+            } else {
+                null
+            }
+
+            if (binding.edLoginEmail.error.isNullOrEmpty() && binding.edLoginPassword.error.isNullOrEmpty()) {
+                lifecycleScope.launchWhenResumed {
+                    launch {
+                        loginViewModel.userLogin(email, password)
+                            .observe(this@LoginActivity) { result ->
+                                result.onSuccess { credential ->
+                                    credential.loginResult?.token?.let { token ->
+                                        loginViewModel.storeAuthToken(token)
+                                        showLoading(false)
+                                        Intent(
+                                            this@LoginActivity,
+                                            MainActivity::class.java
+                                        ).also {
+                                            startActivity(it)
+                                            finish()
                                         }
                                     }
-                                    result.onFailure {
-                                        showToast(
-                                            this@LoginActivity,
-                                            getString(R.string.login_failed_message)
-                                        )
-                                        showLoading(false)
-                                    }
                                 }
-                        }
+                                result.onFailure {
+                                    showToast(
+                                        this@LoginActivity,
+                                        getString(R.string.login_failed_message)
+                                    )
+                                    showLoading(false)
+                                }
+                            }
                     }
+                }
+            } else {
+                showLoading(false)
             }
         }
 
@@ -119,6 +122,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun showLoading(isLoading: Boolean) {
         binding.apply {
             edLoginEmail.isEnabled = !isLoading

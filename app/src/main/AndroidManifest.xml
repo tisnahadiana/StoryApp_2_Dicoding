@@ -24,6 +24,7 @@
 
         <activity
             android:name=".ui.camera.CameraActivity"
+            android:theme="@style/AppTheme.Fullscreen"
             android:exported="false" />
         <activity
             android:name=".ui.post.PostActivity"

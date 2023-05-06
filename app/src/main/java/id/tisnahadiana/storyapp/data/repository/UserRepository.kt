@@ -39,9 +39,5 @@ class UserRepository @Inject constructor(
         }
     }
 
-    suspend fun saveToken(token: String) {
-        loginPreferences.saveToken(token)
-    }
-
     fun getToken(): LiveData<String?> = loginPreferences.getToken()
 }

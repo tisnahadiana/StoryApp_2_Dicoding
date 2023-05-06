@@ -1,5 +1,6 @@
 package id.tisnahadiana.storyapp.ui.detail
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
@@ -23,7 +24,11 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-        val story = intent.getParcelableExtra<StoryEntity>(EXTRA_DETAIL)
+        val story = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(EXTRA_DETAIL, StoryEntity::class.java)
+        } else {
+            intent.getParcelableExtra(EXTRA_DETAIL)
+        }
         val name = story?.name
         val description = story?.description
         val imgUrl = story?.photoUrl
